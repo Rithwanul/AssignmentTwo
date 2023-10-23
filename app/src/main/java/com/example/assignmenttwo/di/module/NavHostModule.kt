@@ -1,16 +1,15 @@
 package com.example.assignmenttwo.di.module
 
-import com.example.assignmenttwo.ui.activitiy.MainActivity
+import com.example.assignmenttwo.navigation.CustomNavHost
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class ActivityBuilderModule {
-
+abstract class NavHostModule {
     @ContributesAndroidInjector(
         modules = [
-            NavHostModule::class,
+            FramentBindingModule::class
         ]
     )
-    abstract fun contributeMainActivity(): MainActivity
+    abstract fun contributeNavHost(): CustomNavHost
 }
