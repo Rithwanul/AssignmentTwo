@@ -5,7 +5,8 @@ import dagger.Module
 
 @Module(
     includes = [
-        ViewModelModule::class
+        ViewModelModule::class,
+        NetworkModule::class
     ]
 )
 class AppModule {
