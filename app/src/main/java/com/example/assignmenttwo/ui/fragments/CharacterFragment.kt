@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.assignmenttwo.CharacterDao
+import com.example.assignmenttwo.database.dao.CharacterDao
 import com.example.assignmenttwo.R
 import com.example.assignmenttwo.databinding.FragmentCharacterBinding
 import com.example.assignmenttwo.di.factory.ViewModelFactory

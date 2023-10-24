@@ -1,8 +1,8 @@
 package com.example.assignmenttwo.di.module
 
 import android.content.Context
-import com.example.assignmenttwo.CharacterDao
-import com.example.assignmenttwo.database.AppDatabase
+import com.example.assignmenttwo.database.dao.CharacterDao
+import com.example.assignmenttwo.database.config.AppDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

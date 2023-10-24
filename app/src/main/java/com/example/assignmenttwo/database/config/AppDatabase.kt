@@ -1,10 +1,10 @@
-package com.example.assignmenttwo.database
+package com.example.assignmenttwo.database.config
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.assignmenttwo.CharacterDao
+import com.example.assignmenttwo.database.dao.CharacterDao
 import com.example.assignmenttwo.model.entity.Character
 
 @Database(
