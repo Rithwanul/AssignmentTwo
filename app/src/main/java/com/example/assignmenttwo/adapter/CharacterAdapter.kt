@@ -10,13 +10,18 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.assignmenttwo.R
 import com.example.assignmenttwo.databinding.LayoutCharacterItemBinding
+import com.example.assignmenttwo.listener.CharacterItemClick
 import com.example.assignmenttwo.model.entity.Character
 import timber.log.Timber
 import javax.inject.Inject
 
-class CharacterAdapter@Inject constructor(
+class CharacterAdapter @Inject constructor(
     private val context: Context
 ) : PagingDataAdapter<Character, CharacterAdapter.CharacterViewHolder>(Comparator) {
+
+
+    private var characterItemClick: CharacterItemClick? = null
+
 
     class CharacterViewHolder constructor(
         private val binding: LayoutCharacterItemBinding
@@ -33,6 +38,9 @@ class CharacterAdapter@Inject constructor(
 
     }
 
+    fun setCharacterItemClickListener(characterItemClick: CharacterItemClick) {
+        this.characterItemClick = characterItemClick
+    }
 
     object Comparator : DiffUtil.ItemCallback<Character>() {
         override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
@@ -46,6 +54,9 @@ class CharacterAdapter@Inject constructor(
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val character = getItem(position)
+        holder.itemView.setOnClickListener {
+            characterItemClick?.onCLick(character!!)
+        }
         holder.bind(character)
     }
 

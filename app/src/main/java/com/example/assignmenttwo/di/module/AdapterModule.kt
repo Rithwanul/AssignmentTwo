@@ -10,8 +10,8 @@ import dagger.Provides
 @Module
 class AdapterModule {
 
-    @Provides
-    fun provideLinearLayoutManager(context: Context) = LinearLayoutManager(context)
+//    @Provides
+//    fun provideLinearLayoutManager(context: Context) = LinearLayoutManager(context)
 
     @Provides
     fun provideCharacterAdapter(context: Context) = CharacterAdapter(context)

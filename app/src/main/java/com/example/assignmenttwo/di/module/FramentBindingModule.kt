@@ -10,7 +10,11 @@ import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
 
-@Module
+@Module(
+    includes = [
+        AdapterModule::class
+    ]
+)
 abstract class FramentBindingModule {
 
     @Binds

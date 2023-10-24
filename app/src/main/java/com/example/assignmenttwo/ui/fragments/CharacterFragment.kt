@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.assignmenttwo.database.dao.CharacterDao
 import com.example.assignmenttwo.R
@@ -16,6 +17,8 @@ import com.example.assignmenttwo.adapter.CharacterAdapter
 import com.example.assignmenttwo.databinding.FragmentCharacterBinding
 import com.example.assignmenttwo.decorator.AdaptiveSpacingItemDecoration
 import com.example.assignmenttwo.di.factory.ViewModelFactory
+import com.example.assignmenttwo.listener.CharacterItemClick
+import com.example.assignmenttwo.model.entity.Character
 import com.example.assignmenttwo.viewmodel.CharacterViewModel
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
@@ -31,7 +34,6 @@ class CharacterFragment @Inject constructor(
     private val factory: ViewModelFactory,
     private val gson: Gson,
     private val characterItemDao: CharacterDao,
-    private val linearLayoutManager: LinearLayoutManager,
     private val characterAdapter: CharacterAdapter
 ) : Fragment() {
 
@@ -58,16 +60,22 @@ class CharacterFragment @Inject constructor(
 
         viewModel = ViewModelProvider(this, factory)[CharacterViewModel::class.java]
 
-
+        val linearLayoutManager = LinearLayoutManager(requireContext())
         binding.rvCharacter.layoutManager = linearLayoutManager
         binding.rvCharacter.setHasFixedSize(true)
         binding.rvCharacter.adapter = characterAdapter
         binding.rvCharacter.addItemDecoration(AdaptiveSpacingItemDecoration(10))
+        characterAdapter.setCharacterItemClickListener(object : CharacterItemClick{
+            override fun onCLick(character: Character) {
+                val direction =
+                    CharacterFragmentDirections.toCharacterDetailsFragment(character.id)
+                findNavController().navigate(direction)
+            }
+        })
 
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.getAllCharacters().collect(FlowCollector {
                 characterAdapter.submitData(it)
-                characterAdapter.notifyDataSetChanged()
             })
 
         }

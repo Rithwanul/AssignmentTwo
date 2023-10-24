@@ -3,6 +3,7 @@ package com.example.assignmenttwo.model.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.lang.reflect.Constructor
 
 @Entity(tableName = "tbl_character")
 data class Character (

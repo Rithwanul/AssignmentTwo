@@ -9,8 +9,7 @@ abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector(
         modules = [
-            NavHostModule::class,
-            AdapterModule::class
+            NavHostModule::class
         ]
     )
     abstract fun contributeMainActivity(): MainActivity
