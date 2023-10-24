@@ -1,18 +1,34 @@
 package com.example.assignmenttwo.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.assignmenttwo.R
 import com.example.assignmenttwo.databinding.FragmentCharacterDetailsBinding
+import com.example.assignmenttwo.di.factory.ViewModelFactory
+import com.example.assignmenttwo.viewmodel.CharacterDetailsViewModel
+import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.json.JSONObject
+import timber.log.Timber
+import javax.inject.Inject
 
-class CharacterDetailsFragment : Fragment() {
+
+class CharacterDetailsFragment @Inject constructor(
+    private val factory: ViewModelFactory,
+    private val gson: Gson
+) : Fragment() {
 
 
     private lateinit var binding: FragmentCharacterDetailsBinding
+    private lateinit var viewModel: CharacterDetailsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,9 +42,25 @@ class CharacterDetailsFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val string = arguments?.getString("data")
-        binding.name.text = string
+        val id = arguments?.getString("data")
+
+
+        viewModel = ViewModelProvider(this, factory)[CharacterDetailsViewModel::class.java]
+
+        CoroutineScope(Dispatchers.IO).launch {
+            if (id != null) {
+                val character = viewModel.getAllCharacter(id)[0]
+
+                binding.name.text = "Name : ${character.name}"
+                binding.house.text = "House : ${character.house}"
+                binding.species.text = "Species : ${character.species}"
+                binding.actor.text = "Actor : ${character.actor}"
+                binding.gender.text = "Gender : ${character.gender}"
+                binding.ancestry.text = "Anchestry : ${character.ancestry}"
+            }
+        }
     }
 }
