@@ -47,7 +47,7 @@ data class CharacterItemResponse(
 	val species: String? = null,
 
 	@field:SerializedName("wand")
-	val wand: Wand? = null,
+	val wand: WandResponse? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null,
