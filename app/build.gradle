@@ -109,4 +109,6 @@ dependencies {
     * Image caching library
     * */
     implementation "io.coil-kt:coil:$coilVersion"
+
+    implementation "com.orhanobut:logger:$orhanobutLogger"
 }

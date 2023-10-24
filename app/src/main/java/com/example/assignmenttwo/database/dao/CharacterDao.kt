@@ -1,5 +1,6 @@
 package com.example.assignmenttwo.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -9,8 +10,17 @@ import com.example.assignmenttwo.model.entity.Character
 @Dao
 interface CharacterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCharacterItem(characterItem: Character)
+    suspend fun insertCharacter(characterItem: Character)
 
     @Query("SELECT * from tbl_character")
     fun getCharacters(): List<Character>
+
+    @Query("Select count(*) from tbl_character")
+    fun isCharacterAvailable(): Int
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCharacters(characters: List<Character>)
+
+    @Query("SELECT * from tbl_character")
+    fun getCharactersBYPage(): PagingSource<Int, Character>
 }
