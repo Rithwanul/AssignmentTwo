@@ -2,11 +2,10 @@ package com.example.assignmenttwo.model.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.assignmenttwo.model.response.character.WandResponse
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "tbl_character_item")
-data class CharacterItem (
+@Entity(tableName = "tbl_character")
+data class Character (
 
     @PrimaryKey
     @field:SerializedName("id")

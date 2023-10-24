@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.assignmenttwo.CharacterItemDao
-import com.example.assignmenttwo.model.entity.CharacterItem
+import com.example.assignmenttwo.CharacterDao
+import com.example.assignmenttwo.model.entity.Character
 
 @Database(
     entities = [
-        CharacterItem::class,
+        Character::class,
     ],
     version = AppDatabase.version,
     exportSchema = false
@@ -17,7 +17,7 @@ import com.example.assignmenttwo.model.entity.CharacterItem
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
-        const val version: Int = 1
+        const val version: Int = 3
         private const val databaseName: String = "CHARACTER-DB"
 
         private var INSTANCE: AppDatabase? = null
@@ -32,5 +32,5 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 
-    abstract fun getCharacterItemDAO(): CharacterItemDao
+    abstract fun getCharacterItemDAO(): CharacterDao
 }

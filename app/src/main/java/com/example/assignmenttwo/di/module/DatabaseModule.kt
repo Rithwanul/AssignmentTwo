@@ -1,7 +1,7 @@
 package com.example.assignmenttwo.di.module
 
 import android.content.Context
-import com.example.assignmenttwo.CharacterItemDao
+import com.example.assignmenttwo.CharacterDao
 import com.example.assignmenttwo.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -17,5 +17,5 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideCharacterItemDAO(appDatabase: AppDatabase): CharacterItemDao = appDatabase.getCharacterItemDAO()
+    fun provideCharacterItemDAO(appDatabase: AppDatabase): CharacterDao = appDatabase.getCharacterItemDAO()
 }
